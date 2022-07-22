@@ -1,5 +1,5 @@
 module "jwt" {
-  source            = "../"
+  source            = "../../"
   role_name         = "jwt-def"
   discovery_url     = "https://bmrf.io"
   bound_issuer      = "https://bmrf.io"
@@ -20,7 +20,7 @@ module "jwt" {
 }
 
 module "jwt-file" {
-  source            = "../"
+  source            = "../../"
   role_name         = "jwt-file"
   discovery_url     = "https://bmrf.io"
   bound_issuer      = "https://bmrf.io"
@@ -36,7 +36,7 @@ module "jwt-file" {
 }
 
 module "jwt-existing-role" {
-  source            = "../"
+  source            = "../../"
   role_name         = "jwt-file"
   discovery_url     = "https://bmrf.io"
   bound_issuer      = "https://bmrf.io"
