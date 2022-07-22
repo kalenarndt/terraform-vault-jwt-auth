@@ -24,11 +24,11 @@ repos:
   hooks:
     - id: terraform_fmt
       name: Format Terraform Configuration
-    # - id: terraform_validate
-    #   exclude: ^/
-    #   name: Validate Terraform Configuration
-    #   args:
-    #     - --envs=VAULT_ADDR="" # For local checks
+    - id: terraform_validate
+      exclude: ^/
+      name: Validate Terraform Configuration
+      args:
+        - --envs=VAULT_ADDR="" # For local checks
     - id: tfupdate
       name: Autoupdate Terraform versions
       args:
