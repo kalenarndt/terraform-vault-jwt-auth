@@ -1,12 +1,17 @@
 resource "vault_policy" "pol" {
   count     = var.create_policy ? 1 : 0
-  namespace = var.namespace
+  namespace = var.create_namespace ? vault_namespace.ns[0].path : var.namespace
   name      = var.policy_name
   policy    = length(var.policy_file) >= 1 ? file("${path.root}/${var.policy_file}") : var.policy_definition
 }
 
+resource "vault_namespace" "ns" {
+  count = var.create_namespace ? 1 : 0
+  path  = var.namespace
+}
+
 resource "vault_jwt_auth_backend" "jwt" {
-  namespace          = var.namespace
+  namespace          = var.create_namespace ? vault_namespace.ns[0].path : var.namespace
   path               = var.path
   type               = var.type
   oidc_discovery_url = var.discovery_url
@@ -14,7 +19,7 @@ resource "vault_jwt_auth_backend" "jwt" {
 }
 
 resource "vault_jwt_auth_backend_role" "role" {
-  namespace         = var.namespace
+  namespace         = var.create_namespace ? vault_namespace.ns[0].path : var.namespace
   backend           = vault_jwt_auth_backend.jwt.path
   role_name         = var.role_name
   token_policies    = var.create_policy ? [vault_policy.pol[0].name] : var.token_policies

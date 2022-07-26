@@ -3,7 +3,6 @@ module "jwt" {
   role_name         = "jwt-def"
   discovery_url     = "https://bmrf.io"
   bound_issuer      = "https://bmrf.io"
-  namespace         = "admin/gcve"
   create_policy     = true
   policy_definition = <<-EOT
     path "*" {
@@ -37,7 +36,24 @@ module "jwt-file" {
 
 module "jwt-existing-role" {
   source            = "../../"
+  role_name         = "jwt-existing-role"
+  path              = "jwt-existing"
+  discovery_url     = "https://bmrf.io"
+  bound_issuer      = "https://bmrf.io"
+  token_policies    = ["admin", "ops", "nevergonna", "giveyou", "up"]
+  bound_claims_type = "glob"
+  user_claim        = "nevergonna"
+  bound_audiences   = ["letyou"]
+  bound_claims = {
+    sub = "down:nevergonna:runaround:anddesertyou*"
+  }
+}
+
+module "jwt-new-ns" {
+  source            = "../../"
   role_name         = "jwt-file"
+  create_namespace  = true
+  namespace         = "rick-roll"
   discovery_url     = "https://bmrf.io"
   bound_issuer      = "https://bmrf.io"
   token_policies    = ["admin", "ops", "nevergonna", "giveyou", "up"]

@@ -39,6 +39,12 @@ variable "namespace" {
   default     = null
 }
 
+variable "create_namespace" {
+  type        = bool
+  description = "(Optional) Boolean that allows for the creation of a Namespace as a part of the module execution. This will be used with the jwt auth role if this is set to true"
+  default     = false
+}
+
 variable "bound_claims_type" {
   type        = string
   description = "(Optional) How to interpret values in the bound_claims map. Can be string or glob"
@@ -78,7 +84,6 @@ variable "user_claim" {
   type        = string
   description = "(Required) The claim that will be used to uniquely identify the user"
 }
-
 
 variable "role_type" {
   type        = string

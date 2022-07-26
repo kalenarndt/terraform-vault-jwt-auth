@@ -24,6 +24,7 @@ No modules.
 |------|------|
 | [vault_jwt_auth_backend.jwt](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/jwt_auth_backend) | resource |
 | [vault_jwt_auth_backend_role.role](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/jwt_auth_backend_role) | resource |
+| [vault_namespace.ns](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/namespace) | resource |
 | [vault_policy.pol](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
 
 ## Inputs
@@ -34,6 +35,7 @@ No modules.
 | <a name="input_bound_claims"></a> [bound\_claims](#input\_bound\_claims) | Map of claims and values to match against for the auth method. Can be a single string or list of strings separated by a comma | `map(string)` | `{}` | no |
 | <a name="input_bound_claims_type"></a> [bound\_claims\_type](#input\_bound\_claims\_type) | (Optional) How to interpret values in the bound\_claims map. Can be string or glob | `string` | `""` | no |
 | <a name="input_bound_issuer"></a> [bound\_issuer](#input\_bound\_issuer) | (Optional) Value of the iss claim that will be matched in a JWT | `string` | `""` | no |
+| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | (Optional) Boolean that allows for the creation of a Namespace as a part of the module execution. This will be used with the jwt auth role if this is set to true | `bool` | `false` | no |
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | (Optional) Boolean that allows for the creation of a policy as a part of the module execution. This will be associated with the jwt auth role if this is set to true | `bool` | `false` | no |
 | <a name="input_discovery_url"></a> [discovery\_url](#input\_discovery\_url) | (Optional) OIDC Discovery URL (base path) that will be used (if defined) | `string` | `""` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | (Optional) Namespace where the resources will be created | `string` | `null` | no |
@@ -52,5 +54,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_bound_audiences"></a> [bound\_audiences](#output\_bound\_audiences) | Bound Claims associated with the jwt auth role |
+| <a name="output_namespace"></a> [namespace](#output\_namespace) | Namespace that was used or created and used during the module execution |
 | <a name="output_role_name"></a> [role\_name](#output\_role\_name) | Name of the role that has been created |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
