@@ -3,6 +3,13 @@ resource "vault_policy" "pol" {
   namespace = var.namespace
   name      = var.policy_name
   policy    = length(var.policy_file) >= 1 ? file("${path.root}/${var.policy_file}") : var.policy_definition
+  lifecycle {
+    # Check Policy_Name isn't the default value
+    precondition {
+      condition     = var.policy_name != ""
+      error_message = "var.policy_name must have a definition when creating a policy."
+    }
+  }
 }
 
 resource "vault_jwt_auth_backend" "jwt" {
