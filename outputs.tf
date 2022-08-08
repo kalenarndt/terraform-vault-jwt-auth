@@ -7,3 +7,8 @@ output "role_name" {
   value       = vault_jwt_auth_backend_role.role.role_name
   description = "Name of the role that has been created"
 }
+
+output "jwt_mount" {
+  value       = var.create_jwt_mount ? vault_jwt_auth_backend.jwt[0] : null
+  description = "Output of the JWT mount that was created"
+}

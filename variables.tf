@@ -63,6 +63,12 @@ variable "create_policy" {
   default     = false
 }
 
+variable "create_jwt_mount" {
+  type        = bool
+  description = "(Optional) Boolean that allows for the creation of an auth backend as a part of the module execution."
+  default     = true
+}
+
 variable "policy_definition" {
   type        = any
   description = "(Optional) Raw Policy definition that can be supplied as a multi-line input value"
