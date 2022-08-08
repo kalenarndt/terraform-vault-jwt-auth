@@ -1,3 +1,8 @@
+data "vault_auth_backend" "jwt" {
+  count = var.create_jwt_mount ? 0 : 1
+  path  = var.path
+}
+
 resource "vault_policy" "pol" {
   count     = var.create_policy ? 1 : 0
   namespace = var.namespace
@@ -13,6 +18,7 @@ resource "vault_policy" "pol" {
 }
 
 resource "vault_jwt_auth_backend" "jwt" {
+  count              = var.create_jwt_mount ? 1 : 0
   namespace          = var.namespace
   path               = var.path
   type               = var.type
@@ -22,7 +28,7 @@ resource "vault_jwt_auth_backend" "jwt" {
 
 resource "vault_jwt_auth_backend_role" "role" {
   namespace         = var.namespace
-  backend           = vault_jwt_auth_backend.jwt.path
+  backend           = var.create_jwt_mount ? vault_jwt_auth_backend.jwt[0].path : data.vault_auth_backend.jwt[0].path
   role_name         = var.role_name
   token_policies    = var.create_policy ? [vault_policy.pol[0].name] : var.token_policies
   bound_audiences   = var.bound_audiences
